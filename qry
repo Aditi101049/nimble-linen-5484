@@ -1,0 +1,430 @@
+Enter password: ************
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 28
+Server version: 8.0.30 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++-------------------------------------+
+| Database                            |
++-------------------------------------+
+| crime_information_management_system |
+| frd                                 |
+| information_schema                  |
+| mysql                               |
+| performance_schema                  |
+| sys                                 |
+| web18sb101db                        |
+| web19sb1010db                       |
++-------------------------------------+
+8 rows in set (0.10 sec)
+
+mysql> create database final;
+Query OK, 1 row affected (0.07 sec)
+
+mysql> show databases;
++-------------------------------------+
+| Database                            |
++-------------------------------------+
+| crime_information_management_system |
+| final                               |
+| frd                                 |
+| information_schema                  |
+| mysql                               |
+| performance_schema                  |
+| sys                                 |
+| web18sb101db                        |
+| web19sb1010db                       |
++-------------------------------------+
+9 rows in set (0.00 sec)
+
+mysql> use final database;
+Database changed
+
+
+mysql> create table Criminal(Criminal_Id int primary key auto_increment,
+    -> Criminal_Name varchar(12),
+    -> Age int,
+    ->  Gender varchar(12),
+    -> Arrest_Date varchar(15),
+    -> Criminal_Address varchar(40),
+    -> Place_Crime varchar(12),
+    -> IdentifyingMark varchar(12),
+    -> CrimeType varchar(12),
+    -> CrimeDetails varchar(20),
+    -> Crime_Status varchar(8),
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 12
+mysql> create table Criminal(Criminal_Id int primary key auto_increment,
+    -> Criminal_Name varchar(12),
+    -> Age int,
+    -> Gender varchar(12),
+    -> Arrest_Date varchar(15),
+    -> Criminal_Address varchar(40),
+    -> IdentifyingMark varchar(12),
+    -> CrimeType varchar(12),
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 8
+mysql> create table Criminal(Criminal_Id int primary key auto_increment,
+    -> Criminal_Name varchar(12),
+    -> Age int,
+    ->  Gender varchar(12),
+    -> Arrest_Date varchar(15),
+    -> Criminal_Address varchar(40),
+    -> Place_Crime varchar(12),
+    -> IdentifyingMark varchar(12),
+    -> CrimeType varchar(12),
+    -> CrimeDetails varchar(20),
+    -> Crime_Status varchar(8)
+    -> );
+Query OK, 0 rows affected (0.19 sec)
+
+mysql> select * from Criminal
+    -> ;
+Empty set (0.03 sec)
+
+mysql> desc Criminal;
++------------------+-------------+------+-----+---------+----------------+
+| Field            | Type        | Null | Key | Default | Extra          |
++------------------+-------------+------+-----+---------+----------------+
+| Criminal_Id      | int         | NO   | PRI | NULL    | auto_increment |
+| Criminal_Name    | varchar(12) | YES  |     | NULL    |                |
+| Age              | int         | YES  |     | NULL    |                |
+| Gender           | varchar(12) | YES  |     | NULL    |                |
+| Arrest_Date      | varchar(15) | YES  |     | NULL    |                |
+| Criminal_Address | varchar(40) | YES  |     | NULL    |                |
+| Place_Crime      | varchar(12) | YES  |     | NULL    |                |
+| IdentifyingMark  | varchar(12) | YES  |     | NULL    |                |
+| CrimeType        | varchar(12) | YES  |     | NULL    |                |
+| CrimeDetails     | varchar(20) | YES  |     | NULL    |                |
+| Crime_Status     | varchar(8)  | YES  |     | NULL    |                |
++------------------+-------------+------+-----+---------+----------------+
+11 rows in set (0.05 sec)
+
+mysql> insert into Criminal values(1,'ram',22,'male','25/6/2022','goa','pune','mole_on_right_hand','killing','murder_of_females','not_solved');
+ERROR 1406 (22001): Data too long for column 'IdentifyingMark' at row 1
+mysql> insert into Criminal values(1,'ram',22,'male','25/6/2022','goa','pune','knieftattos','killing','murder_of_females','not_solved');
+ERROR 1406 (22001): Data too long for column 'Crime_Status' at row 1
+mysql> insert into Criminal values(1,'ram',22,'male','25/6/2022','goa','pune','knieftattos','killing','murder_of_females','notsolved');
+ERROR 1406 (22001): Data too long for column 'Crime_Status' at row 1
+mysql> insert into Criminal values(1,'ram',22,'male','25/6/2022','goa','pune','knieftattos','killing','murder_of_females','unsolved');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> desc Criminal;
++------------------+-------------+------+-----+---------+----------------+
+| Field            | Type        | Null | Key | Default | Extra          |
++------------------+-------------+------+-----+---------+----------------+
+| Criminal_Id      | int         | NO   | PRI | NULL    | auto_increment |
+| Criminal_Name    | varchar(12) | YES  |     | NULL    |                |
+| Age              | int         | YES  |     | NULL    |                |
+| Gender           | varchar(12) | YES  |     | NULL    |                |
+| Arrest_Date      | varchar(15) | YES  |     | NULL    |                |
+| Criminal_Address | varchar(40) | YES  |     | NULL    |                |
+| Place_Crime      | varchar(12) | YES  |     | NULL    |                |
+| IdentifyingMark  | varchar(12) | YES  |     | NULL    |                |
+| CrimeType        | varchar(12) | YES  |     | NULL    |                |
+| CrimeDetails     | varchar(20) | YES  |     | NULL    |                |
+| Crime_Status     | varchar(8)  | YES  |     | NULL    |                |
++------------------+-------------+------+-----+---------+----------------+
+11 rows in set (0.00 sec)
+
+mysql> select * from Criminal
+    -> ;
++-------------+---------------+------+--------+-------------+------------------+-------------+-----------------+-----------+-------------------+--------------+
+| Criminal_Id | Criminal_Name | Age  | Gender | Arrest_Date | Criminal_Address | Place_Crime | IdentifyingMark | CrimeType | CrimeDetails      | Crime_Status |
++-------------+---------------+------+--------+-------------+------------------+-------------+-----------------+-----------+-------------------+--------------+
+|           1 | ram           |   22 | male   | 25/6/2022   | goa              | pune        | knieftattos     | killing   | murder_of_females | unsolved     |
++-------------+---------------+------+--------+-------------+------------------+-------------+-----------------+-----------+-------------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> insert into Criminal values(1,'sham',34,'male','2/7/2022','mumbai','mumbai','moles','killing','murder_of_females','unsolved');
+ERROR 1062 (23000): Duplicate entry '1' for key 'criminal.PRIMARY'
+mysql> insert into Criminal values(2,'sham',34,'male','2/7/2022','mumbai','mumbai','moles','killing','murder_of_females','unsolved');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into Criminal values(3,'raju',50,'male','5/9/2021','bihar','vashi','scars','cybercrime','hackdata','unsolved');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Criminal values(4,'sayd',40,'male','6/9/2022','bihar','patna','lefthandcut','violence','violence','unsolved');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Criminal values(5,'gtjad',45,'male','12/9/2022','gorkhpur','patna','blueeyes','arson','arson','unsolved');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Criminal
+    -> ;
++-------------+---------------+------+--------+-------------+------------------+-------------+-----------------+------------+-------------------+--------------+
+| Criminal_Id | Criminal_Name | Age  | Gender | Arrest_Date | Criminal_Address | Place_Crime | IdentifyingMark | CrimeType  | CrimeDetails      | Crime_Status |
++-------------+---------------+------+--------+-------------+------------------+-------------+-----------------+------------+-------------------+--------------+
+|           1 | ram           |   22 | male   | 25/6/2022   | goa              | pune        | knieftattos     | killing    | murder_of_females | unsolved     |
+|           2 | sham          |   34 | male   | 2/7/2022    | mumbai           | mumbai      | moles           | killing    | murder_of_females | unsolved     |
+|           3 | raju          |   50 | male   | 5/9/2021    | bihar            | vashi       | scars           | cybercrime | hackdata          | unsolved     |
+|           4 | sayd          |   40 | male   | 6/9/2022    | bihar            | patna       | lefthandcut     | violence   | violence          | unsolved     |
+|           5 | gtjad         |   45 | male   | 12/9/2022   | gorkhpur         | patna       | blueeyes        | arson      | arson             | unsolved     |
++-------------+---------------+------+--------+-------------+------------------+-------------+-----------------+------------+-------------------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from Criminal;
++-------------+---------------+------+--------+-------------+------------------+-------------+-----------------+------------+-------------------+--------------+
+| Criminal_Id | Criminal_Name | Age  | Gender | Arrest_Date | Criminal_Address | Place_Crime | IdentifyingMark | CrimeType  | CrimeDetails      | Crime_Status |
++-------------+---------------+------+--------+-------------+------------------+-------------+-----------------+------------+-------------------+--------------+
+|           1 | ram           |   22 | male   | 25/6/2022   | goa              | pune        | knieftattos     | killing    | murder_of_females | unsolved     |
+|           2 | sham          |   34 | male   | 2/7/2022    | mumbai           | mumbai      | moles           | killing    | murder_of_females | unsolved     |
+|           3 | raju          |   50 | male   | 5/9/2021    | bihar            | vashi       | scars           | cybercrime | hackdata          | unsolved     |
+|           4 | sayd          |   40 | male   | 6/9/2022    | bihar            | patna       | lefthandcut     | violence   | violence          | unsolved     |
+|           5 | gtjad         |   45 | male   | 12/9/2022   | gorkhpur         | patna       | blueeyes        | arson      | arson             | unsolved     |
+|           6 | ram           |   56 | male   | 22/4/2022   | panaji           | goa         | mole            | domestic   | abuse             | NULL         |
++-------------+---------------+------+--------+-------------+------------------+-------------+-----------------+------------+-------------------+--------------+
+6 rows in set (0.00 sec)
+
+mysql> create table police_station(Station_Id int primary key auto_increment,
+    -> PoliceStation_Name varchar(30),
+    -> PoliceStation_Area varchar(30),
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 4
+mysql> create table police_station(Station_Id int primary key auto_increment,
+    -> PoliceStation_Name varchar(30),
+    -> PoliceStation_Area varchar(30)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select * from police_station;
+Empty set (0.05 sec)
+
+mysql> desc police_station;
++--------------------+-------------+------+-----+---------+----------------+
+| Field              | Type        | Null | Key | Default | Extra          |
++--------------------+-------------+------+-----+---------+----------------+
+| Station_Id         | int         | NO   | PRI | NULL    | auto_increment |
+| PoliceStation_Name | varchar(30) | YES  |     | NULL    |                |
+| PoliceStation_Area | varchar(30) | YES  |     | NULL    |                |
++--------------------+-------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+
+mysql> insert into police_station values(1,'Pune_police_station','deccan');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into police_station values(2,'Mumbai_police_station','juhu');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into police_station values(3,'vashi_police_station','vashi');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into police_station values(4,'bihar_police_station','bihar');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into police_station values(5,'goa_police_station','panaji');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from police_station;
++------------+-----------------------+--------------------+
+| Station_Id | PoliceStation_Name    | PoliceStation_Area |
++------------+-----------------------+--------------------+
+|          1 | Pune_police_station   | deccan             |
+|          2 | Mumbai_police_station | juhu               |
+|          3 | vashi_police_station  | vashi              |
+|          4 | bihar_police_station  | bihar              |
+|          5 | goa_police_station    | panaji             |
++------------+-----------------------+--------------------+
+5 rows in set (0.00 sec)
+
+mysql> create table Crime(CrimeType varchar(29),
+    -> Crime_details varchar(30),
+    -> Suspects_name varchar(20),
+    -> victims_name varchar(30),
+    -> Dateofcrime varchar(20),
+    -> place_crime varchar(30),
+    -> crime_status varchar(20),
+    -> criminal_name varchar(20)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into Crime('killing','murder_of_females','Rajesh','Koyal','25/6/22','pune','unsolved','ram');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''killing','murder_of_females','Rajesh','Koyal','25/6/22','pune','unsolved','ram'' at line 1
+mysql> insert into Crime('killing',
+    -> 'murder_of_females',
+    -> 'rajesh',
+    -> 'koyal',
+    -> '25/6/22',
+    -> 'pune',
+    -> 'unsolved',
+    -> 'ram';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''killing',
+'murder_of_females',
+'rajesh',
+'koyal',
+'25/6/22',
+'pune',
+'unsolved'' at line 1
+mysql> insert into Crime values('killing','murder_of_females','Rajesh','Koyal','25/6/22','pune','unsolved','ram');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into Crime values('killing','murder_of_females','faruk','radha','2/7/22','mumbai','unsolved','sham');
+Query OK, 1 row affected (0.24 sec)
+
+mysql> insert into Crime values('cybercrime','hackdata','gomull','mohan','5/9/22','vashi','solved','raju');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Crime values('violence','violence','holam','rmeshhr','6/9/22','patna','solved','sayd');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Crime values('arson','arson','rasil','jaraml','12/9/22','patna','solved','gtjad');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Crime values('domesticabuse','abuse','roshni','jyoti','22/4/22','gao','unsolved','ram');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Crime;
++---------------+-------------------+---------------+--------------+-------------+-------------+--------------+---------------+
+| CrimeType     | Crime_details     | Suspects_name | victims_name | Dateofcrime | place_crime | crime_status | criminal_name |
++---------------+-------------------+---------------+--------------+-------------+-------------+--------------+---------------+
+| killing       | murder_of_females | Rajesh        | Koyal        | 25/6/22     | pune        | unsolved     | ram           |
+| killing       | murder_of_females | faruk         | radha        | 2/7/22      | mumbai      | unsolved     | sham          |
+| cybercrime    | hackdata          | gomull        | mohan        | 5/9/22      | vashi       | solved       | raju          |
+| violence      | violence          | holam         | rmeshhr      | 6/9/22      | patna       | solved       | sayd          |
+| arson         | arson             | rasil         | jaraml       | 12/9/22     | patna       | solved       | gtjad         |
+| domesticabuse | abuse             | roshni        | jyoti        | 22/4/22     | gao         | unsolved     | ram           |
++---------------+-------------------+---------------+--------------+-------------+-------------+--------------+---------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from Criminal where CrimeType='killing' OR Arrest_Date='25/6/22';
++-------------+---------------+------+--------+-------------+------------------+-------------+-----------------+-----------+-------------------+--------------+
+| Criminal_Id | Criminal_Name | Age  | Gender | Arrest_Date | Criminal_Address | Place_Crime | IdentifyingMark | CrimeType | CrimeDetails      | Crime_Status |
++-------------+---------------+------+--------+-------------+------------------+-------------+-----------------+-----------+-------------------+--------------+
+|           1 | ram           |   22 | male   | 25/6/2022   | goa              | pune        | knieftattos     | killing   | murder_of_females | unsolved     |
+|           2 | sham          |   34 | male   | 2/7/2022    | mumbai           | mumbai      | moles           | killing   | murder_of_females | unsolved     |
++-------------+---------------+------+--------+-------------+------------------+-------------+-----------------+-----------+-------------------+--------------+
+2 rows in set (0.00 sec)
+
+mysql>  select * from Crime where Suspects_Name='rasil';
++-----------+---------------+---------------+--------------+-------------+-------------+--------------+---------------+
+| CrimeType | Crime_details | Suspects_name | victims_name | Dateofcrime | place_crime | crime_status | criminal_name |
++-----------+---------------+---------------+--------------+-------------+-------------+--------------+---------------+
+| arson     | arson         | rasil         | jaraml       | 12/9/22     | patna       | solved       | gtjad         |
++-----------+---------------+---------------+--------------+-------------+-------------+--------------+---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT Crime_status, COUNT(Crime_status) FROM Crime GROUP BY Crime_status HAVING COUNT('solved');
++--------------+---------------------+
+| Crime_status | COUNT(Crime_status) |
++--------------+---------------------+
+| unsolved     |                   3 |
+| solved       |                   3 |
++--------------+---------------------+
+2 rows in set (0.05 sec)
+
+mysql>  SELECT DateOfCrime, COUNT(Crime_status) FROM Crime GROUP BY Crime_status HAVING COUNT('Solved')OR DateOfCrime>='22/4/22';
++-------------+---------------------+
+| DateOfCrime | COUNT(Crime_status) |
++-------------+---------------------+
+| 25/6/22     |                   3 |
+| 5/9/22      |                   3 |
++-------------+---------------------+
+2 rows in set (0.05 sec)
+
+mysql>  SELECT DateOfCrime, COUNT(Crime_status) FROM Crime GROUP BY Crime_status HAVING COUNT('Solved')OR DateOfCrime>='22/6/22';
++-------------+---------------------+
+| DateOfCrime | COUNT(Crime_status) |
++-------------+---------------------+
+| 25/6/22     |                   3 |
+| 5/9/22      |                   3 |
++-------------+---------------------+
+2 rows in set (0.00 sec)
+
+mysql>  SELECT DateOfCrime, COUNT(Crime_status) FROM Crime GROUP BY Crime_status HAVING COUNT('Solved')OR DateOfCrime>='22/7/22';
++-------------+---------------------+
+| DateOfCrime | COUNT(Crime_status) |
++-------------+---------------------+
+| 25/6/22     |                   3 |
+| 5/9/22      |                   3 |
++-------------+---------------------+
+2 rows in set (0.00 sec)
+
+mysql>  SELECT DateOfCrime, COUNT(Crime_status) FROM Crime GROUP BY Crime_status HAVING COUNT('unsolved')OR DateOfCrime>='22/7/22';
++-------------+---------------------+
+| DateOfCrime | COUNT(Crime_status) |
++-------------+---------------------+
+| 25/6/22     |                   3 |
+| 5/9/22      |                   3 |
++-------------+---------------------+
+2 rows in set (0.00 sec)
+
+mysql>  SELECT DateOfCrime, COUNT(Crime_status) FROM Crime GROUP BY Crime_status HAVING COUNT('unsolved')AND DateOfCrime>='22/7/22';
++-------------+---------------------+
+| DateOfCrime | COUNT(Crime_status) |
++-------------+---------------------+
+| 25/6/22     |                   3 |
+| 5/9/22      |                   3 |
++-------------+---------------------+
+2 rows in set (0.00 sec)
+
+mysql>  SELECT DateOfCrime, COUNT(Crime_status) FROM Crime GROUP BY Crime_status HAVING COUNT('unsolved')AND DateOfCrime>='5/9/22';
++-------------+---------------------+
+| DateOfCrime | COUNT(Crime_status) |
++-------------+---------------------+
+| 5/9/22      |                   3 |
++-------------+---------------------+
+1 row in set (0.00 sec)
+
+mysql>  SELECT DateOfCrime, COUNT(Crime_status) FROM Crime GROUP BY Crime_status HAVING COUNT('Solved');
++-------------+---------------------+
+| DateOfCrime | COUNT(Crime_status) |
++-------------+---------------------+
+| 25/6/22     |                   3 |
+| 5/9/22      |                   3 |
++-------------+---------------------+
+2 rows in set (0.00 sec)
+
+mysql>  SELECT DateOfCrime, COUNT(Crime_status) FROM Crime GROUP BY Crime_status HAVING COUNT('unsolved');
++-------------+---------------------+
+| DateOfCrime | COUNT(Crime_status) |
++-------------+---------------------+
+| 25/6/22     |                   3 |
+| 5/9/22      |                   3 |
++-------------+---------------------+
+2 rows in set (0.00 sec)
+
+mysql>  SELECT DateOfCrime, COUNT(Crime_status) FROM Crime GROUP BY DateOfCrime HAVING COUNT('Solved');
++-------------+---------------------+
+| DateOfCrime | COUNT(Crime_status) |
++-------------+---------------------+
+| 25/6/22     |                   1 |
+| 2/7/22      |                   1 |
+| 5/9/22      |                   1 |
+| 6/9/22      |                   1 |
+| 12/9/22     |                   1 |
+| 22/4/22     |                   1 |
++-------------+---------------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT DateOfCrime, COUNT(Crime_status)Total_Cases_In_Current_Month FROM Crime GROUP BY DateOfCrime HAVING DateOfCrime>='02/9/22';
++-------------+------------------------------+
+| DateOfCrime | Total_Cases_In_Current_Month |
++-------------+------------------------------+
+| 25/6/22     |                            1 |
+| 2/7/22      |                            1 |
+| 5/9/22      |                            1 |
+| 6/9/22      |                            1 |
+| 12/9/22     |                            1 |
+| 22/4/22     |                            1 |
++-------------+------------------------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT DateOfCrime, COUNT(Crime_status)Total_Cases_In_Current_Month FROM Crime GROUP BY DateOfCrime HAVING DateOfCrime>='2/4/22';
++-------------+------------------------------+
+| DateOfCrime | Total_Cases_In_Current_Month |
++-------------+------------------------------+
+| 25/6/22     |                            1 |
+| 5/9/22      |                            1 |
+| 6/9/22      |                            1 |
+| 22/4/22     |                            1 |
++-------------+------------------------------+
+4 rows in set (0.00 sec)
+ 
